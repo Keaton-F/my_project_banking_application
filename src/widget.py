@@ -31,6 +31,6 @@ def mask_account_card(user_data: str) -> str:
 def get_date(date_time_data: str) -> str:
     """Функция, которая получает строку, содержащую информацию о дате и времени, и форматирует её
     в более удобный для чтения формат, отбрасывая данные времени."""
-    date_data = date_time_data.split('T')
-    date_data_list = date_data[0].split('-')
-    return f'{date_data_list[2]}.{date_data_list[1]}.{date_data_list[0]}'
+    date_data = date_time_data.split("T")
+    date_data_list = date_data[0].split("-")
+    return f"{date_data_list[2]}.{date_data_list[1]}.{date_data_list[0]}"
