@@ -1,5 +1,7 @@
 import pytest
+
 from src.processing import filter_by_state, sort_by_date
+
 
 # Фикстура с операциями
 @pytest.fixture
@@ -20,9 +22,11 @@ def test_filter_by_state_found(operations_fixture):
     for operation in result:
         assert operation["state"] == "EXECUTED"
 
+
 def test_filter_by_state_not_found(operations_fixture):
     result = filter_by_state(operations_fixture, "NON_EXISTENT")
     assert result == []
+
 
 @pytest.mark.parametrize("state", ["EXECUTED", "CANCELED"])
 def test_filter_by_state_param(operations_fixture, state):
@@ -37,10 +41,12 @@ def test_sort_by_date_desc(operations_fixture):
     valid_dates = [operation["date"] for operation in result if "T" in operation["date"]]
     assert valid_dates == sorted(valid_dates, reverse=True)
 
+
 def test_sort_by_date_asc(operations_fixture):
     result = sort_by_date(operations_fixture, descending=False)
     valid_dates = [operation["date"] for operation in result if "T" in operation["date"]]
     assert valid_dates == sorted(valid_dates)
+
 
 def test_sort_by_date_with_invalid(operations_fixture):
     result = sort_by_date(operations_fixture)

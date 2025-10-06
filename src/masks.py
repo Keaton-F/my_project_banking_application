@@ -7,7 +7,7 @@ def get_mask_card_number(user_card_number: str) -> str:
         if user_card_number.isdigit():
             if len(user_card_number) == 16:
                 mask_card_number = user_card_number[:6] + "******" + user_card_number[12:]
-                message_for_user = " ".join([mask_card_number[i: i + 4] for i in range(0, len(mask_card_number), 4)])
+                message_for_user = " ".join([mask_card_number[i : i + 4] for i in range(0, len(mask_card_number), 4)])
             elif len(user_card_number) > 16:
                 message_for_user = "Номер не может содержать лишние символы."
             else:
