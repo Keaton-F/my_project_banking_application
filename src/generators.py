@@ -1,4 +1,6 @@
-def filter_by_currency(transactions, currency):
+from typing import Dict, Generator, List
+
+def filter_by_currency(transactions: List[Dict], currency: str):
     """
     Принимает список транзакций и возвращает итератор,
     который выдаёт только те, у которых код валюты совпадает с заданным.
@@ -8,7 +10,7 @@ def filter_by_currency(transactions, currency):
             yield transaction
 
 
-def transaction_descriptions(sample_transactions):
+def transaction_descriptions(sample_transactions: List[Dict[str, str]]):
     """
     Генератор, возвращающий описание каждой транзакции из списка.
     """
