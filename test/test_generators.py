@@ -1,5 +1,5 @@
 import pytest
-from src.generators import filter_by_currency  # импортируем твою функцию
+from src.generators import filter_by_currency, transaction_descriptions
 
 
 # Примерные тестовые данные
@@ -41,3 +41,24 @@ def test_filter_by_currency_not_found():
 def test_filter_by_currency_empty_list():
     result = list(filter_by_currency([], "USD"))
     assert result == []
+
+
+def test_transaction_descriptions_basic():
+    sample_transactions = [
+        {"description": "Перевод организации"},
+        {"description": "Перевод со счета на счет"},
+        {"description": "Перевод с карты на карту"},
+    ]
+    result = list(transaction_descriptions(sample_transactions))
+    assert result == [
+        "Перевод организации",
+        "Перевод со счета на счет",
+        "Перевод с карты на карту",
+    ]
+
+
+def test_transaction_descriptions_empty_list():
+    result = list(transaction_descriptions([]))
+    assert result == []
+
+
