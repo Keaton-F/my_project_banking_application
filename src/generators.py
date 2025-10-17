@@ -16,3 +16,13 @@ def transaction_descriptions(sample_transactions):
         yield transaction.get("description")
 
 
+def card_number_generator(start: int, end: int):
+    """
+    Генератор, выдающий номера банковских карт
+    в формате 'XXXX XXXX XXXX XXXX' от start до end включительно.
+    """
+    for number in range(start, end + 1):
+        # Преобразуем число в строку длиной 16 символов с ведущими нулями
+        formatted = f"{number:016}"
+        # Разбиваем на группы по 4 символа
+        yield " ".join([formatted[i:i + 4] for i in range(0, 16, 4)])

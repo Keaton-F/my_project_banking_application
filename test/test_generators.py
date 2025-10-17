@@ -1,5 +1,6 @@
 import pytest
-from src.generators import filter_by_currency, transaction_descriptions
+
+from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
 
 
 # Примерные тестовые данные
@@ -62,3 +63,47 @@ def test_transaction_descriptions_empty_list():
     assert result == []
 
 
+@pytest.mark.parametrize(
+    "start, end, expected",
+    [
+        (
+            1,
+            3,
+            [
+                "0000 0000 0000 0001",
+                "0000 0000 0000 0002",
+                "0000 0000 0000 0003",
+            ],
+        ),
+        (
+            9999999999999997,
+            9999999999999999,
+            [
+                "9999 9999 9999 9997",
+                "9999 9999 9999 9998",
+                "9999 9999 9999 9999",
+            ],
+        ),
+    ],
+)
+def test_card_number_generator_parametrized(start, end, expected):
+    result = list(card_number_generator(start, end))
+    assert result == expected
+
+
+@pytest.fixture
+def small_range():
+    return list(card_number_generator(10, 12))
+
+
+def test_card_number_format(small_range):
+    for card in small_range:
+        parts = card.split(" ")
+        assert len(parts) == 4
+        assert all(len(p) == 4 for p in parts)
+        assert card.replace(" ", "").isdigit()
+
+
+def test_card_number_generator_empty_range():
+    result = list(card_number_generator(5, 1))
+    assert result == []
