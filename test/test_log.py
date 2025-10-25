@@ -1,5 +1,5 @@
 import pytest
-from src.decorators.log import log
+from src.decorators import log
 from pathlib import Path
 
 
