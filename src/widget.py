@@ -11,7 +11,7 @@ def mask_account_card(user_data: str) -> str:
     found_index = 0
     if user_data:
         for index, item in enumerate(list_formatted_user_data):
-            if len(item) == 16 and not "счет" in list_formatted_user_data:
+            if len(item) == 16 and "счет" not in list_formatted_user_data:
                 found_index = index
                 user_data_type = "card"
             elif item == "счет" and len(list_formatted_user_data) == 2:
