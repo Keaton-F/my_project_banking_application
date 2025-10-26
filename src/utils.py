@@ -1,5 +1,5 @@
 import json
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
 
 def read_json(file_path: str) -> List[Dict[str, Any]]:
@@ -14,7 +14,7 @@ def read_json(file_path: str) -> List[Dict[str, Any]]:
         Если файл пустой, некорректный или не найден, возвращает пустой список.
     """
     try:
-        with open(file_path, 'r', encoding='utf-8') as f:
+        with open(file_path, "r", encoding="utf-8") as f:
             data = json.load(f)
 
         if not isinstance(data, list):

@@ -1,7 +1,8 @@
 import os
+from typing import Dict, Optional
+
 import requests
 from dotenv import load_dotenv
-from typing import Optional, Dict
 
 load_dotenv()  # Загрузка переменных окружения
 
@@ -34,14 +35,8 @@ def convert_to_rub(transaction: Dict) -> Optional[float]:
     if currency not in ("USD", "EUR"):
         return amount  # Для других валют возвращает без конвертации
 
-    params = {
-        "from": currency,
-        "to": "RUB",
-        "amount": amount
-    }
-    headers = {
-        "apikey": API_KEY
-    }
+    params = {"from": currency, "to": "RUB", "amount": amount}
+    headers = {"apikey": API_KEY}
 
     try:
         response = requests.get(API_URL, headers=headers, params=params, timeout=10)
