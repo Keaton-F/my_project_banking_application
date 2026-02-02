@@ -1,5 +1,7 @@
 import logging
 from pathlib import Path
+import json
+from typing import Any, Dict, List
 
 # Настройка логера для utils
 log_path = Path("logs")
@@ -17,10 +19,6 @@ logger.addHandler(file_handler)
 
 # Тестовая запись для проверки
 logger.debug("Логгер utils настроен и работает")
-
-
-import json
-from typing import Any, Dict, List
 
 
 def read_json(file_path: str) -> List[Dict[str, Any]]:
