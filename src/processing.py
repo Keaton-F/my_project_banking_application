@@ -1,4 +1,5 @@
 import re
+from collections import Counter
 from typing import Any, Dict, List
 
 
@@ -30,3 +31,22 @@ def process_bank_search(data: List[Dict[str, Any]], search: str) -> List[Dict[st
         for transaction in data
         if pattern.search(str(transaction.get("description", "")))
     ]
+
+
+def process_bank_operations(data: List[Dict[str, Any]], categories: List[str]) -> Dict[str, int]:
+    """
+    Подсчитывает количество операций по категориям на основе description.
+
+    :param data: Список транзакций
+    :param categories: Список категорий
+    :return: Словарь {'category': count}
+    """
+    counter = Counter()
+
+    for transaction in data:
+        description = str(transaction.get("description", "")).lower()
+        for category in categories:
+            if category.lower() in description:
+                counter[category] += 1
+
+    return dict(counter)
