@@ -1,6 +1,9 @@
-from unittest.mock import patch, Mock
-from src.external_api import convert_to_rub
+from unittest.mock import Mock, patch
+
 from requests.exceptions import RequestException
+
+from src.external_api import convert_to_rub
+
 
 def test_convert_to_rub_rub_amount():
     """

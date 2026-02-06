@@ -1,6 +1,6 @@
+import json
 import logging
 from pathlib import Path
-import json
 from typing import Any, Dict, List
 
 # Настройка логера для utils
