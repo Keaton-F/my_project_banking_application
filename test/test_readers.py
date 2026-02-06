@@ -17,7 +17,7 @@ def test_read_transactions_from_csv(mock_read_csv):
     result = read_transactions_from_csv(path)
 
     # Проверяем вызов pandas.read_csv
-    mock_read_csv.assert_called_once_with(path)
+    mock_read_csv.assert_called_once_with(path, sep=";")
 
     # Проверяем правильный возврат списка словарей
     assert result == [

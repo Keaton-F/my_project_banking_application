@@ -1,3 +1,5 @@
+import re
+from collections import Counter
 from typing import Any, Dict, List
 
 
@@ -12,3 +14,39 @@ def sort_by_date(date_data: List[Dict[str, Any]], descending: bool = True) -> Li
     """Функция, которая принимает список словарей и необязательный параметр, задающий порядок сортировки
     (по умолчанию — убывание). Функция должна возвращать новый список, отсортированный по дате (date)."""
     return sorted(date_data, key=lambda x: x["date"], reverse=descending)
+
+
+def process_bank_search(data: List[Dict[str, Any]], search: str) -> List[Dict[str, Any]]:
+    """
+    Ищет операции, в чьём описании есть указанная строка.
+
+    :param data: Список транзакций
+    :param search: Строка для поиска
+    :return: Список найденных транзакций
+    """
+    pattern = re.compile(re.escape(search), re.IGNORECASE)
+
+    return [
+        transaction
+        for transaction in data
+        if pattern.search(str(transaction.get("description", "")))
+    ]
+
+
+def process_bank_operations(data: List[Dict[str, Any]], categories: List[str]) -> Dict[str, int]:
+    """
+    Подсчитывает количество операций по категориям на основе description.
+
+    :param data: Список транзакций
+    :param categories: Список категорий
+    :return: Словарь {'category': count}
+    """
+    counter: Counter[str] = Counter()
+
+    for transaction in data:
+        description = str(transaction.get("description", "")).lower()
+        for category in categories:
+            if category.lower() in description:
+                counter[category] += 1
+
+    return dict(counter)
