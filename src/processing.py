@@ -41,7 +41,7 @@ def process_bank_operations(data: List[Dict[str, Any]], categories: List[str]) -
     :param categories: Список категорий
     :return: Словарь {'category': count}
     """
-    counter = Counter()
+    counter: Counter[str] = Counter()
 
     for transaction in data:
         description = str(transaction.get("description", "")).lower()
